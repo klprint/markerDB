@@ -16,7 +16,12 @@ getMarkerGenes(celltype, species, field = c("marker_accession",
 
 \item{positive}{True by default. Only return positive markers}
 
-\item{filter_list}{A list of further filters, according to MarkerDB manual for HTTP requests}
+\item{filter_list}{Additional filters in list format (i.e: list(stage = "p7")).
+Wildcards can be added by using a "\%" sign.
+So, if all embryonic mouse markers are wanted, a list like list(stage="E\%") can be used.}
+}
+\value{
+character vector of marker genes
 }
 \description{
 This functions gives a vector of annotated markers of a cell type within a predefined species.

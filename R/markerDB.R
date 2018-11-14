@@ -96,8 +96,10 @@ findCellTypes <- function(celltype, species){
 #' @param field can be either "marker_accession" to get GeneIDs or "marker_name" to return gene names
 #' @param positive True by default. Only return positive markers
 #' @param filter_list Additional filters in list format (i.e: list(stage = "p7")).
-#' Wildcards can be added by using a "%" sign.
-#' So, if all embryonic mouse markers are wanted, list like list(stage="E%") can be used.
+#' Wildcards can be added by using a "\%" sign.
+#' So, if all embryonic mouse markers are wanted, a list like list(stage="E\%") can be used.
+#'
+#' @return character vector of marker genes
 getMarkerGenes <- function(celltype, species, field = c("marker_accession", "marker_name"), positive = TRUE, filter_list = list()){
 
   if(length(field) > 1){
@@ -130,9 +132,7 @@ getMarkerGenes <- function(celltype, species, field = c("marker_accession", "mar
 #'
 #' @param tissue name of tissue
 #' @param species name of species
-#' @param filter_list Additional filters in list format (i.e: list(stage = "p7")).
-#' Wildcards can be added by using a "%" sign.
-#' So, if all embryonic mouse markers are wanted, list like list(stage="E%") can be used.
+#' @param filter_list Additional filters in list format (i.e: list(stage = "p7")). Wildcards can be added by using a "\%" sign. So, if all embryonic mouse markers are wanted, list like list(stage="E\%") can be used.
 #'
 #' @return Character vector of cell types
 getAllCelltypesInTissue <- function(tissue, species, filter_list = list()){
@@ -158,4 +158,45 @@ getAllCelltypesInTissue <- function(tissue, species, filter_list = list()){
   }else{
     stop("No entries found!")
   }
+}
+
+appendFilters <- function(url.string, filter_list){
+  if(length(filter_list) > 0){
+    url.string <- paste0(url.string, "/f:")
+    url.string <- paste0(url.string, names(filter_list)[1], "=", filter_list[[1]])
+
+    if(length(filter_list) > 1){
+      for(n in names(filter_list)[2:length(names(filter_list))]){
+        url.string <- paste0(url.string, "-", n, "=", filter_list[n])
+      }
+    }
+
+  }
+
+  return(url.string)
+}
+
+#' Returns cell types per species and filter criteria
+#'
+#' This is a more flexible function, but basically resembles the usability of getAllCelltypesInTissue without the tissue argument.
+#' Using the filter_list argument with a "tissue" name can reproduce the getAllCelltypesInTissue function.
+#'
+#' CAUTION this function returns cell types where positive AND negative markers are known.
+#'
+#' @param species Name of species
+#' @param filter_list Additional filters in list format (i.e: list(stage = "p7")). Wildcards can be added by using a "\%" sign. So, if all embryonic mouse markers are wanted, list like list(stage="E\%") can be used
+getAllCelltypes <- function(species, filter_list = list()){
+  url.string <-  paste0("http://markers.blebli.de/api/v1.0/species/", tolower(species))
+
+  url.string <- appendFilters(url.string, filter_list)
+
+  url.string <- gsub("%", "%25", url.string)
+
+  curl.return <- rjson::fromJSON(
+    RCurl::getURL(
+      url.string
+    )
+  )$celltypes
+
+  return(curl.return)
 }
