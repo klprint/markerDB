@@ -1,11 +1,13 @@
 Package: markerDB
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
+Title: Give access to MarkerDB (http://markers.blebli.de)
+Version: 0.0.1
+Author: Kevin Leiss
+Maintainer: Kevin Leiss <k.leiss@zmbh.uni-heidelberg.de>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
+Imports: RCurl,
+    rjson
