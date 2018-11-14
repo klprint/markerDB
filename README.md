@@ -100,7 +100,7 @@ getMarkerGenes("neural_stem_cell", "mouse")
 [1] "ENSMUSG00000004891" "ENSMUSG00000029086" "ENSMUSG00000005320" "ENSMUSG00000030283" "ENSMUSG00000020122" "ENSMUSG00000074637"
 ```
 
-And markers for stage neural stem cells at stage P7:
+And markers for neural stem cells at stage P7:
 ```r
 getMarkerGenes("neural_stem_cell", "mouse", filter_list = list(stage="p7"))
 ```
