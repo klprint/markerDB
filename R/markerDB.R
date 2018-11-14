@@ -116,6 +116,7 @@ getMarkerGenes <- function(celltype, species, field = c("marker_accession", "mar
       )
     )
 
+  marker.genes <- unique(marker.genes)
   return(marker.genes)
 }
 

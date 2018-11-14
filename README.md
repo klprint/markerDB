@@ -71,4 +71,39 @@ $name
 [1] "mouse"
 ``` 
 
-Let's say we then want to have a list of markers for 
+Let's say we then want to find all cell types in mouse cerebellum.
+We can use the following to get a vector of cell types:
+
+```r
+getAllCelltypesInTissue("cerebellum", "mouse")
+```
+```
+[1] "neural_stem_cell"       "GABAergic_interneurons" "glial_progenitor"       "GABAergic_progenitors"  "medulloblastomas"       "Astrocytes"             "Oligodendrocytes"       "neuronal_progenitors"   "rhombic_lip_cell" 
+```
+
+But here, all cell types throughout development are listed.
+If we are only interested in cell types, already annotated in P7 cerebellum, we can extend the querry with a list:
+
+```r
+getAllCelltypesInTissue("cerebellum", "mouse", filter_list = list(stage  = "P7"))
+```
+```
+[1] "neural_stem_cell"     "Astrocytes"           "Oligodendrocytes"     "neuronal_progenitors"
+```
+
+And finally, we can find marker genes for neural stem cells:
+
+```r
+getMarkerGenes("neural_stem_cell", "mouse")
+```
+```
+[1] "ENSMUSG00000004891" "ENSMUSG00000029086" "ENSMUSG00000005320" "ENSMUSG00000030283" "ENSMUSG00000020122" "ENSMUSG00000074637"
+```
+
+And markers for stage neural stem cells at stage P7:
+```r
+getMarkerGenes("neural_stem_cell", "mouse", filter_list = list(stage="p7"))
+```
+```
+[1] "ENSMUSG00000029086"
+```
