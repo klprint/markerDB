@@ -107,3 +107,12 @@ getMarkerGenes("neural_stem_cell", "mouse", filter_list = list(stage="p7"))
 ```
 [1] "ENSMUSG00000029086"
 ```
+
+And whoever does not like ENSEMBL IDs can also get the gene symbols:
+
+```r
+getMarkerGenes("neural_stem_cell", "mouse", filter_list = list(stage="p7"), field = "marker_name")
+```
+```
+[1] "Prom1"
+```
