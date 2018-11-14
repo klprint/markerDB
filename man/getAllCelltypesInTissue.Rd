@@ -11,7 +11,9 @@ getAllCelltypesInTissue(tissue, species, filter_list = list())
 
 \item{species}{name of species}
 
-\item{filter_list}{Additional filters in list format (i.e: list(stage = "p7"))}
+\item{filter_list}{Additional filters in list format (i.e: list(stage = "p7")).
+Wildcards can be added by using a "%" sign.
+So, if all embryonic mouse markers are wanted, list like list(stage="E%") can be used.}
 }
 \value{
 Character vector of cell types

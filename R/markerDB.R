@@ -95,7 +95,9 @@ findCellTypes <- function(celltype, species){
 #' @param species name of species (as can be found using getSpecies function)
 #' @param field can be either "marker_accession" to get GeneIDs or "marker_name" to return gene names
 #' @param positive True by default. Only return positive markers
-#' @param filter_list A list of further filters, according to MarkerDB manual for HTTP requests
+#' @param filter_list Additional filters in list format (i.e: list(stage = "p7")).
+#' Wildcards can be added by using a "%" sign.
+#' So, if all embryonic mouse markers are wanted, list like list(stage="E%") can be used.
 getMarkerGenes <- function(celltype, species, field = c("marker_accession", "marker_name"), positive = TRUE, filter_list = list()){
 
   if(length(field) > 1){
@@ -109,6 +111,8 @@ getMarkerGenes <- function(celltype, species, field = c("marker_accession", "mar
       url.string <- paste0(url.string, "-", n, "=", filter_list[n])
     }
   }
+
+  url.string <- gsub("%", "%25", url.string)
 
   marker.genes <- rjson::fromJSON(
     RCurl::getURL(
@@ -126,7 +130,9 @@ getMarkerGenes <- function(celltype, species, field = c("marker_accession", "mar
 #'
 #' @param tissue name of tissue
 #' @param species name of species
-#' @param filter_list Additional filters in list format (i.e: list(stage = "p7"))
+#' @param filter_list Additional filters in list format (i.e: list(stage = "p7")).
+#' Wildcards can be added by using a "%" sign.
+#' So, if all embryonic mouse markers are wanted, list like list(stage="E%") can be used.
 #'
 #' @return Character vector of cell types
 getAllCelltypesInTissue <- function(tissue, species, filter_list = list()){
@@ -138,6 +144,8 @@ getAllCelltypesInTissue <- function(tissue, species, filter_list = list()){
       url.string <- paste0(url.string, "-", n, "=", filter_list[n])
     }
   }
+
+  url.string <- gsub("%", "%25", url.string)
 
   curl.return <- rjson::fromJSON(
     RCurl::getURL(
