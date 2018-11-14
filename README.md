@@ -5,7 +5,7 @@ This R package was made to have an easy access through R to our cell type marker
 The easiest way to install the package is using `devtools`.
 
 ```r
-devtools::install_github()
+devtools::install_github("klprint/markerDB")
 ```
 
 ## How to use
