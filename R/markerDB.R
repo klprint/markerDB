@@ -3,6 +3,8 @@
 #' No parameters required
 #'
 #' @return character vector of species in MarkerDB
+#'
+#' @export
 getSpecies <- function(){
   json_data = rjson::fromJSON(
     RCurl::getURL("http://markers.blebli.de/api/v1.0/species")
@@ -20,6 +22,7 @@ getSpecies <- function(){
 #' @param species Character variable of species name
 #'
 #' @return List of species annotations
+#' @export
 getSpeciesInfo <- function(species){
   if(tolower(species) %in% tolower(getSpecies())){
     json_data = rjson::fromJSON(
@@ -50,6 +53,7 @@ parseSpeciesCellTypeInfo <- function(rawInfo){
 #' @param species name of species
 #'
 #' @return data.frame of informations on all markers of a specific cell type.
+#' @export
 getSpeciesCellTypeInfo <- function(celltype, species){
 
   speciesInfo <- getSpeciesInfo(species)
@@ -79,6 +83,7 @@ getSpeciesCellTypeInfo <- function(celltype, species){
 #' @param species name of species to look into
 #'
 #' @return vector of celltypes
+#' @export
 findCellTypes <- function(celltype, species){
   speciesInfo <- getSpeciesInfo(species)
   annot.cts <- speciesInfo$celltypes
@@ -100,6 +105,7 @@ findCellTypes <- function(celltype, species){
 #' So, if all embryonic mouse markers are wanted, a list like list(stage="E\%") can be used.
 #'
 #' @return character vector of marker genes
+#' @export
 getMarkerGenes <- function(celltype, species, field = c("marker_accession", "marker_name"), positive = TRUE, filter_list = list()){
 
   if(length(field) > 1){
@@ -135,6 +141,7 @@ getMarkerGenes <- function(celltype, species, field = c("marker_accession", "mar
 #' @param filter_list Additional filters in list format (i.e: list(stage = "p7")). Wildcards can be added by using a "\%" sign. So, if all embryonic mouse markers are wanted, list like list(stage="E\%") can be used.
 #'
 #' @return Character vector of cell types
+#' @export
 getAllCelltypesInTissue <- function(tissue, species, filter_list = list()){
 
   url.string <-  paste0("http://markers.blebli.de/api/v1.0/species/", tolower(species), "/f:tissue=", tissue)
@@ -185,6 +192,7 @@ appendFilters <- function(url.string, filter_list){
 #'
 #' @param species Name of species
 #' @param filter_list Additional filters in list format (i.e: list(stage = "p7")). Wildcards can be added by using a "\%" sign. So, if all embryonic mouse markers are wanted, list like list(stage="E\%") can be used
+#' @export
 getAllCelltypes <- function(species, filter_list = list()){
   url.string <-  paste0("http://markers.blebli.de/api/v1.0/species/", tolower(species))
 
