@@ -4,12 +4,15 @@
 \alias{getAllCelltypes}
 \title{Returns cell types per species and filter criteria}
 \usage{
-getAllCelltypes(species, filter_list = list())
+getAllCelltypes(species, filter_list = list(),
+  server = "http://markers.blebli.de")
 }
 \arguments{
 \item{species}{Name of species}
 
 \item{filter_list}{Additional filters in list format (i.e: list(stage = "p7")). Wildcards can be added by using a "\%" sign. So, if all embryonic mouse markers are wanted, list like list(stage="E\%") can be used}
+
+\item{server}{URL of the server hosting the markerDB website.}
 }
 \description{
 This is a more flexible function, but basically resembles the usability of getAllCelltypesInTissue without the tissue argument.

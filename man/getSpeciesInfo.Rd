@@ -4,10 +4,12 @@
 \alias{getSpeciesInfo}
 \title{Get informations of a species in MarkerDB}
 \usage{
-getSpeciesInfo(species)
+getSpeciesInfo(species, server = "http://markers.blebli.de")
 }
 \arguments{
 \item{species}{Character variable of species name}
+
+\item{server}{URL of the server hosting the markerDB website.}
 }
 \value{
 List of species annotations

@@ -4,7 +4,8 @@
 \alias{getAllCelltypesInTissue}
 \title{Finds all cell types annotated per tissue and species}
 \usage{
-getAllCelltypesInTissue(tissue, species, filter_list = list())
+getAllCelltypesInTissue(tissue, species, filter_list = list(),
+  server = "http://markers.blebli.de")
 }
 \arguments{
 \item{tissue}{name of tissue}
@@ -12,6 +13,8 @@ getAllCelltypesInTissue(tissue, species, filter_list = list())
 \item{species}{name of species}
 
 \item{filter_list}{Additional filters in list format (i.e: list(stage = "p7")). Wildcards can be added by using a "\%" sign. So, if all embryonic mouse markers are wanted, list like list(stage="E\%") can be used.}
+
+\item{server}{URL of the server hosting the markerDB website.}
 }
 \value{
 Character vector of cell types

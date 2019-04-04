@@ -4,11 +4,14 @@
 \alias{getSpecies}
 \title{Get all species in MarkerDB}
 \usage{
-getSpecies()
+getSpecies(server = "http://markers.blebli.de")
+}
+\arguments{
+\item{server}{URL of the server hosting the markerDB website.}
 }
 \value{
 character vector of species in MarkerDB
 }
 \description{
-No parameters required
+Get all species in MarkerDB
 }
