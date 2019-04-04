@@ -5,7 +5,8 @@
 \title{Get all markers for a specific cell type within a species}
 \usage{
 getMarkerGenes(celltype, species, field = c("marker_accession",
-  "marker_name"), positive = TRUE, filter_list = list())
+  "marker_name"), positive = TRUE, filter_list = list(),
+  exclusive = NULL, server = "http://markers.blebli.de")
 }
 \arguments{
 \item{celltype}{name of celltype}
@@ -19,6 +20,11 @@ getMarkerGenes(celltype, species, field = c("marker_accession",
 \item{filter_list}{Additional filters in list format (i.e: list(stage = "p7")).
 Wildcards can be added by using a "\%" sign.
 So, if all embryonic mouse markers are wanted, a list like list(stage="E\%") can be used.}
+
+\item{exclusive}{Either Null, "all" or a vector with celltypes.
+If provided, only marker genes are returned that are exclusive to the celltype specified in "celltype" amongst all annotated markers or the celltypes given in this parameter.}
+
+\item{server}{URL of the server hosting the markerDB website.}
 }
 \value{
 character vector of marker genes

@@ -4,12 +4,15 @@
 \alias{getSpeciesCellTypeInfo}
 \title{Get a table of celltype informations}
 \usage{
-getSpeciesCellTypeInfo(celltype, species)
+getSpeciesCellTypeInfo(celltype, species,
+  server = "http://markers.blebli.de")
 }
 \arguments{
 \item{celltype}{name of celltype}
 
 \item{species}{name of species}
+
+\item{server}{URL of the server hosting the markerDB website.}
 }
 \value{
 data.frame of informations on all markers of a specific cell type.

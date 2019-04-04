@@ -3,6 +3,7 @@
 export(findCellTypes)
 export(getAllCelltypes)
 export(getAllCelltypesInTissue)
+export(getCelltypeEnrichment)
 export(getMarkerGenes)
 export(getSpecies)
 export(getSpeciesCellTypeInfo)
